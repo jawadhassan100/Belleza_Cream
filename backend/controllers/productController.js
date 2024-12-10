@@ -4,7 +4,7 @@ const cloudinary = require('../config/cloudinary');
 
 exports.addProduct = async (req, res) => {
     try {
-      const { title, description, price, ingredients } = req.body;
+      const { name, description, price, ingredients } = req.body;
   
       // Check if a file was uploaded
       if (!req.file) {
@@ -31,11 +31,11 @@ exports.addProduct = async (req, res) => {
   
       // Create a new product document
       const product = new Product({
-        title,
+        name,
         description,
         price,
         ingredients,
-        images: [uploadedImage], // Store the single uploaded image URL in an array
+        mainImage: [uploadedImage], // Store the single uploaded image URL in an array
       });
   
       await product.save();

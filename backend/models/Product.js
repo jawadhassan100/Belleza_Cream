@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const productSchema = new mongoose.Schema({
-  title: {
+  name: {
     type: String,
     required: true,
   },
@@ -13,7 +13,7 @@ const productSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  images: [
+  mainImage: [
     {
       type: String, // URL of the image
       required: true,
@@ -26,13 +26,6 @@ const productSchema = new mongoose.Schema({
     },
   ],
 
-  reviews: [
-    {
-      user: String,
-      rating: Number,
-      comment: String,
-    },
-  ],
 
 }, { timestamps: true });
 

@@ -91,20 +91,26 @@ exports.updateQuantity = async (req, res) => {
 
 // Remove product from cart
 exports.removeFromCart = async (req, res) => {
-  const { sessionId, productId } = req.params;  // Expect sessionId and productId in URL params
-
-  try {
-    // Find the cart based on sessionId
-    const cart = await Cart.findOne({ sessionId });
-    if (!cart) return res.status(404).json({ message: 'Cart not found' });
-
-    // Remove the product from the cart
-    cart.products = cart.products.filter(p => p.productId.toString() !== productId);
-
-    await cart.save();
-    res.status(200).json({ message: 'Product removed from cart', cart });
-  } catch (error) {
-    res.status(500).json({ message: 'Error removing product from cart', error });
-  }
-};
-
+    const { sessionId, productId } = req.params; // Expect sessionId and productId in URL params
+  
+    try {
+      // Find the cart based on sessionId
+      const cart = await Cart.findOne({ sessionId });
+      if (!cart) return res.status(404).json({ message: 'Cart not found' });
+  
+      // Remove the product from the cart
+      cart.products = cart.products.filter(p => p.productId.toString() !== productId);
+  
+      if (cart.products.length === 0) {
+        // If the cart is empty after removing the product, delete the cart
+        await Cart.deleteOne({ sessionId });
+        return res.status(200).json({ message: 'Cart is now empty and session removed' });
+      }
+  
+      await cart.save();
+      res.status(200).json({ message: 'Product removed from cart', cart });
+    } catch (error) {
+      res.status(500).json({ message: 'Error removing product from cart', error });
+    }
+  };
+  
