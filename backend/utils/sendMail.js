@@ -1,6 +1,6 @@
 const nodemailer = require('nodemailer')
 const createTransporter = require('../config/smtpConfig');
-
+const path = require('path');
 
 const sendEmail = (email, subject, htmlContent) => {
     const transporter = createTransporter(); // Use the transporter from smtpConfig
@@ -9,7 +9,14 @@ const sendEmail = (email, subject, htmlContent) => {
         from: process.env.EMAIL_USER,
         to: email,
         subject: subject,
-        html: htmlContent // Use HTML content
+        html: htmlContent ,// Use HTML content
+        attachments: [
+            {
+              filename: 'bellezaLogo.jpg',
+              path: path.join(__dirname, './Template/image/bellezaLogo.jpg'),
+              cid: 'logo' // Match the cid used in the HTML template
+            },
+          ]
     };
 
     transporter.sendMail(mailOptions, (error, info) => {
