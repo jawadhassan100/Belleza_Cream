@@ -12,7 +12,12 @@ const app = express()
 
 connectDB()
 
-app.use(cors())
+app.use(
+    cors({
+      origin: "http://localhost:5173",
+      credentials: true // enable set cookie
+    })
+  );
 
 app.get("/", (req , res)=>{
     res.send("Hello!! The backend is running")

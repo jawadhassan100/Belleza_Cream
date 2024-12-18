@@ -1,11 +1,50 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { CiMenuFries } from "react-icons/ci";
 import { TfiClose } from "react-icons/tfi";
 import { FaShoppingCart } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link , useNavigate } from "react-router-dom";
+import { AuthContext } from "../../helpers/AuthContext";
+import axios from "axios";
+import { useSnackbar } from "notistack";
+import config from '../../config/config';
+import { useSelector } from "react-redux";
+
+
+
+const BASE_URL = config.BASE_URL;
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const { isAdmin, setIsAdmin } = useContext(AuthContext);
+  const { enqueueSnackbar } = useSnackbar();
+  const navigate = useNavigate()
+
+  const cart = useSelector((state) => state.cart); // Access cart state from Redux
+
+    // Calculate the total quantity of items in the cart
+    const totalItems = cart.items.reduce((total, item) => total + item.quantity, 0);
+
+  const handleLogout = async () => {
+    try {
+      const token = localStorage.getItem('token');
+      const response = await axios.post(`${BASE_URL}/api/logout`, {}, {
+        withCredentials: true,
+        headers: { Authorization: `${token}` },
+      });
+
+      if (response.status === 200) {
+        localStorage.removeItem('token');
+        localStorage.removeItem('isAdmin');
+        setIsAdmin(false);
+        enqueueSnackbar(response.data.msg, { variant: "success", autoHideDuration: 1000 });
+        setTimeout(()=>{
+          navigate("/")
+        }, 2000)
+      }
+    } catch (error) {
+      enqueueSnackbar(error.response?.data?.msg || error.msg, { variant: "error", autoHideDuration: 1000 });
+    }
+  };
 
   return (
     <div>
@@ -27,17 +66,32 @@ const Navbar = () => {
           <Link to="/products" className="hover:text-purple-900 transition duration-300">
             Products
           </Link>
+          {isAdmin && (
+              <Link to="/dashboard">
+              Dashboard
+            </Link>
+            )}
           <Link to="/contact-us" className="hover:text-purple-900 transition duration-300">
             Contact Us
           </Link>
+         
         </div>
 
         {/* Right: Cart Icon */}
         <div className="flex items-center gap-5">
-          <Link to="/cart" className="text-white  transition duration-300">
-            <FaShoppingCart size={24} />
+          <Link to="/cart" className="text-white flex items-center transition duration-300">
+            <FaShoppingCart size={24}  />
+            {totalItems  > 0 && (
+              <span className=" bg-purple-900 text-white text-xs rounded-full px-1.5 py-0.5">
+                {totalItems }
+              </span>
+            )}
           </Link>
-
+          {isAdmin && (
+            <button onClick={handleLogout} className="bg-purple-700 text-white font-semibold px-5 py-1 rounded-sm hover:bg-purple-900 hidden md:block lg:block ml-4">
+              Logout
+            </button>
+          )}
           {/* Hamburger Menu Button for Small Screens */}
           <button onClick={() => setIsOpen(!isOpen)} className="md:hidden">
             <CiMenuFries className="text-2xl text-white" />
@@ -65,9 +119,19 @@ const Navbar = () => {
           <li>
             <Link to="/products" onClick={() => setIsOpen(false)}>Products</Link>
           </li>
+          {isAdmin && (
+                <Link to="/dashboard"  onClick={() => {
+                  setIsOpen(false);
+                }}>Dashboard</Link>
+              )}
           <li>
             <Link to="/contact-us" onClick={() => setIsOpen(false)}>Contact Us</Link>
           </li>
+          {isAdmin && (
+            <button onClick={handleLogout} className="bg-purple-700 text-white font-semibold px-5 py-1 rounded-sm hover:bg-purple-900">
+              Logout
+            </button>
+          )}
         </ul>
       </div>
     </div>

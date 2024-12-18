@@ -22,7 +22,7 @@ const orderConfirmation = (userName, order) => {
         </ul>
         
         <p style="font-size: 16px; margin: 10px 0;">
-          <strong>Total Price:</strong> ${order.totalPrice} AED
+          <strong>Total Price:</strong> ${order.totalPrice} PKR
         </p>
         
         <p style="font-size: 16px; margin: 10px 0;">

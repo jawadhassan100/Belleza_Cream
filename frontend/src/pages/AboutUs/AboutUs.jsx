@@ -1,7 +1,10 @@
+import Footer from "../../components/Footer/Footer";
 
 
 const AboutUs = () => {
     return (
+        <>
+       
       <section className="bg-purple-100 text-white py-20 px-4">
         <div className="max-w-7xl mx-auto text-center">
           {/* Section Title */}
@@ -82,6 +85,8 @@ const AboutUs = () => {
           </div>
         </div>
       </section>
+        <Footer/>
+      </>
     );
   };
   
