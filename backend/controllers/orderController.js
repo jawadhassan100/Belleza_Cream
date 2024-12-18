@@ -8,6 +8,12 @@ exports.createOrder = async (req, res) => {
   try {
     const { address, fullName, email, phoneNumber, city, country, productId, quantity } = req.body;
 
+
+    // Validate input
+    if (!productId || !quantity) {
+      return res.status(400).json({ message: "Product ID and quantity are required" });
+    }
+
     // Fetch the product based on the provided productId
     const product = await Product.findById(productId);
     if (!product) {
