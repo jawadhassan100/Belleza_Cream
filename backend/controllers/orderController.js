@@ -4,54 +4,54 @@ const sendMail = require("../utils/sendMail");
 const orderConfirmation = require("../utils/Template/orderConfirmation");
 
 // Create an order directly from a product
-exports.createOrder = async (req, res) => {
-  try {
-    const { address, fullName, email, phoneNumber, city, country, productId, quantity } = req.body;
+  exports.createOrder = async (req, res) => {
+    try {
+      const { address, fullName, email, phoneNumber, city, country, productId, quantity } = req.body;
 
 
-    // Validate input
-    if (!productId || !quantity) {
-      return res.status(400).json({ message: "Product ID and quantity are required" });
+      // Validate input
+      if (!productId || !quantity) {
+        return res.status(400).json({ message: "Product ID and quantity are required" });
+      }
+
+      // Fetch the product based on the provided productId
+      const product = await Product.findById(productId);
+      if (!product) {
+        return res.status(404).json({ message: 'Product not found' });
+      }
+
+      // Calculate total price based on quantity
+      const totalPrice = product.price * quantity;
+
+      // Create a new order
+      const newOrder = new Order({
+        fullName,
+        email,
+        phoneNumber,
+        city,
+        country,
+        products: [{ product: product._id, quantity }], // Directly reference the product
+        address,
+        paymentMethod: 'cod', // Cash on delivery
+        totalPrice,
+      });
+
+      await newOrder.save();
+
+      // Prepare email details
+      const subject = "Order Confirmation";
+      const htmlContent = orderConfirmation(fullName, newOrder);
+
+      // Send order confirmation email
+      sendMail(email, subject, htmlContent);
+
+      // Send success response
+      res.status(200).json({ message: "Order created successfully", order: newOrder });
+      console.log("Order:", newOrder);
+    } catch (err) {
+      res.status(500).json({ message: err.message });
     }
-
-    // Fetch the product based on the provided productId
-    const product = await Product.findById(productId);
-    if (!product) {
-      return res.status(404).json({ message: 'Product not found' });
-    }
-
-    // Calculate total price based on quantity
-    const totalPrice = product.price * quantity;
-
-    // Create a new order
-    const newOrder = new Order({
-      fullName,
-      email,
-      phoneNumber,
-      city,
-      country,
-      products: [{ product: product._id, quantity }], // Directly reference the product
-      address,
-      paymentMethod: 'cod', // Cash on delivery
-      totalPrice,
-    });
-
-    await newOrder.save();
-
-    // Prepare email details
-    const subject = "Order Confirmation";
-    const htmlContent = orderConfirmation(fullName, newOrder);
-
-    // Send order confirmation email
-    sendMail(email, subject, htmlContent);
-
-    // Send success response
-    res.status(200).json({ message: "Order created successfully", order: newOrder });
-    console.log("Order:", newOrder);
-  } catch (err) {
-    res.status(500).json({ message: err.message });
-  }
-};
+  };
 
 // Get all orders (admin only)
 exports.getAllOrders = async (req, res) => {

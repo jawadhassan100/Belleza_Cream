@@ -1,7 +1,7 @@
 
 const Ingredients = () => {
   return (
-    <section className="bg-gradient-to-br from-purple-200 to-purple-50 py-16 px-4">
+    <section className="bg-gradient-to-br mb-3 from-purple-200 to-purple-50 py-16 px-4">
       <div className="max-w-7xl mx-auto text-center">
         {/* Title */}
         <h2 className="text-4xl font-bold text-purple-700 mb-8">

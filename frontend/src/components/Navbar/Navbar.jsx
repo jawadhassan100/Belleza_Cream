@@ -1,15 +1,11 @@
 import { useContext, useState } from "react";
 import { CiMenuFries } from "react-icons/ci";
 import { TfiClose } from "react-icons/tfi";
-import { FaShoppingCart } from "react-icons/fa";
-import { Link , useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../helpers/AuthContext";
 import axios from "axios";
 import { useSnackbar } from "notistack";
 import config from '../../config/config';
-import { useSelector } from "react-redux";
-
-
 
 const BASE_URL = config.BASE_URL;
 
@@ -17,12 +13,7 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { isAdmin, setIsAdmin } = useContext(AuthContext);
   const { enqueueSnackbar } = useSnackbar();
-  const navigate = useNavigate()
-
-  const cart = useSelector((state) => state.cart); // Access cart state from Redux
-
-    // Calculate the total quantity of items in the cart
-    const totalItems = cart.items.reduce((total, item) => total + item.quantity, 0);
+  const navigate = useNavigate();
 
   const handleLogout = async () => {
     try {
@@ -37,9 +28,9 @@ const Navbar = () => {
         localStorage.removeItem('isAdmin');
         setIsAdmin(false);
         enqueueSnackbar(response.data.msg, { variant: "success", autoHideDuration: 1000 });
-        setTimeout(()=>{
-          navigate("/")
-        }, 2000)
+        setTimeout(() => {
+          navigate("/");
+        }, 2000);
       }
     } catch (error) {
       enqueueSnackbar(error.response?.data?.msg || error.msg, { variant: "error", autoHideDuration: 1000 });
@@ -55,43 +46,38 @@ const Navbar = () => {
           <Link to="/">BELLEZA</Link>
         </div>
 
-        {/* Center: Menu Items */}
-        <div className="hidden md:flex lg:flex space-x-8 text-white font-semibold text-lg items-center">
-          <Link to="/" className="hover:text-purple-900 transition duration-300">
-            Home
-          </Link>
-          <Link to="/about-us" className="hover:text-purple-900 transition duration-300">
-            About Us
-          </Link>
-          <Link to="/products" className="hover:text-purple-900 transition duration-300">
-            Products
-          </Link>
-          {isAdmin && (
-              <Link to="/dashboard">
-              Dashboard
+        {/* Right: Menu Items, Cart Icon, and Logout */}
+        <div className="flex items-center space-x-8 text-white font-semibold text-lg">
+          <div className="hidden md:flex gap-8 space-x-6">
+            <Link to="/" className="hover:text-purple-900 transition duration-300">
+              Home
             </Link>
+            <Link to="/about-us" className="hover:text-purple-900 transition duration-300">
+              About Us
+            </Link>
+            <Link to="/products" className="hover:text-purple-900 transition duration-300">
+              Products
+            </Link>
+            {isAdmin && (
+              <Link to="/dashboard" className="hover:text-purple-900 transition duration-300">
+                Dashboard
+              </Link>
             )}
-          <Link to="/contact-us" className="hover:text-purple-900 transition duration-300">
-            Contact Us
-          </Link>
-         
-        </div>
+            <Link to="/contact-us" className="hover:text-purple-900 transition duration-300">
+              Contact Us
+            </Link>
+          </div>
 
-        {/* Right: Cart Icon */}
-        <div className="flex items-center gap-5">
-          <Link to="/cart" className="text-white flex items-center transition duration-300">
-            <FaShoppingCart size={24}  />
-            {totalItems  > 0 && (
-              <span className=" bg-purple-900 text-white text-xs rounded-full px-1.5 py-0.5">
-                {totalItems }
-              </span>
-            )}
-          </Link>
+
           {isAdmin && (
-            <button onClick={handleLogout} className="bg-purple-700 text-white font-semibold px-5 py-1 rounded-sm hover:bg-purple-900 hidden md:block lg:block ml-4">
+            <button
+              onClick={handleLogout}
+              className="bg-purple-700 text-white font-semibold px-5 py-1 rounded-sm hover:bg-purple-900 hidden md:block lg:block"
+            >
               Logout
             </button>
           )}
+
           {/* Hamburger Menu Button for Small Screens */}
           <button onClick={() => setIsOpen(!isOpen)} className="md:hidden">
             <CiMenuFries className="text-2xl text-white" />
@@ -120,15 +106,18 @@ const Navbar = () => {
             <Link to="/products" onClick={() => setIsOpen(false)}>Products</Link>
           </li>
           {isAdmin && (
-                <Link to="/dashboard"  onClick={() => {
-                  setIsOpen(false);
-                }}>Dashboard</Link>
-              )}
+            <li>
+              <Link to="/dashboard" onClick={() => setIsOpen(false)}>Dashboard</Link>
+            </li>
+          )}
           <li>
             <Link to="/contact-us" onClick={() => setIsOpen(false)}>Contact Us</Link>
           </li>
           {isAdmin && (
-            <button onClick={handleLogout} className="bg-purple-700 text-white font-semibold px-5 py-1 rounded-sm hover:bg-purple-900">
+            <button
+              onClick={handleLogout}
+              className="bg-purple-700 text-white font-semibold px-5 py-1 rounded-sm hover:bg-purple-900"
+            >
               Logout
             </button>
           )}
