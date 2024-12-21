@@ -9,7 +9,7 @@ router.post('/add', upload.single('image'), auth , adminAuth,productImageControl
 
 router.put('/:id', upload.single('image'), auth , adminAuth, productImageController.updateImage);
 
-router.get('/:productId',auth , adminAuth, productImageController.getImagesByProduct);
+router.get('/all', productImageController.getAllImages);
 
 router.delete('/:id', auth , adminAuth, productImageController.deleteImage);
 

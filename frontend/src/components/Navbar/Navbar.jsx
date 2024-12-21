@@ -40,7 +40,7 @@ const Navbar = () => {
   return (
     <div>
       {/* Main Navbar */}
-      <div className="flex justify-between items-center px-4 py-4 sm:px-8 lg:px-16 bg-purple-500">
+      <div className="flex justify-between items-center px-4 py-4 sm:px-8 fixed z-50 w-full lg:px-16 bg-purple-500">
         {/* Left: Logo */}
         <div className="text-2xl font-bold md:text-[28px] lg:text-[32px] text-white">
           <Link to="/">BELLEZA</Link>
@@ -55,8 +55,8 @@ const Navbar = () => {
             <Link to="/about-us" className="hover:text-purple-900 transition duration-300">
               About Us
             </Link>
-            <Link to="/products" className="hover:text-purple-900 transition duration-300">
-              Products
+            <Link to="/product/image" className="hover:text-purple-900 transition duration-300">
+              Product
             </Link>
             {isAdmin && (
               <Link to="/dashboard" className="hover:text-purple-900 transition duration-300">

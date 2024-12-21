@@ -9,6 +9,7 @@ import WhyChooseUs from "./components/whyChooseUs/whyChooseUs"
 import { FaArrowUp } from "react-icons/fa6";
 import { FaWhatsapp } from 'react-icons/fa';
 import { useRef } from "react";
+import ProductImages from "./components/ProductImages/ProductImages"
 
 const HomePage = () => {
   const [showScrollButton, setShowScrollButton] = useState(false);
@@ -56,6 +57,7 @@ const HomePage = () => {
     <div className="overflow-hidden">
        <Hero onScrollToProducts={handleScrollToProducts}/>
        <Product  productSectionRef= {productSectionRef}/>
+       <ProductImages/>
        <IngredientsSection/>
        <Features/>
        <WhyChooseUs/>

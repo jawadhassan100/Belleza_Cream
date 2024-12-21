@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import config from "../../config/config";
 import { Link } from "react-router";
-import OrderForm from "../../pages/OrderForm/OrderForm";
 
 
 
@@ -83,7 +82,6 @@ const Product = ({ productSectionRef }) => {
           />
         </div>
       </div>
-
       
     </div>
     </section>
