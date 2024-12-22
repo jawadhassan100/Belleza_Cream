@@ -115,7 +115,10 @@ const Navbar = () => {
           </li>
           {isAdmin && (
             <button
-              onClick={handleLogout}
+            onClick={() => {
+              handleLogout();  // Log out the user
+              setIsOpen(false);  // Ensure the navbar is closed on logout
+            }}
               className="bg-purple-700 text-white font-semibold px-5 py-1 rounded-sm hover:bg-purple-900"
             >
               Logout

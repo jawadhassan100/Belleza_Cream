@@ -17,7 +17,7 @@ const WhyChooseUs = () => {
         </p>
 
         {/* Cards for Features */}
-        <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3">
+        <div className="grid gap-6 sm:grid-cols-3 md:grid-cols-3">
           {/* First Card */}
           <div className="bg-white text-gray-800 p-6 md:p-8 rounded-lg shadow-lg transform transition duration-300 ease-in-out hover:scale-105 hover:shadow-2xl">
             <div className="flex justify-center text-5xl text-purple-600 mb-4">

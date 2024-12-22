@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import config from "../../config/config";
 import { Link } from "react-router";
+import LoadingAnimation from "../LoadingAnimation/LoadingAnimation";
 const BASE_URL = config.BASE_URL;
 
 const ProductImages = () => {
@@ -26,11 +27,9 @@ const ProductImages = () => {
       }, []);
   
       if (loading) {
-        return (
-          <div className="flex justify-center items-center h-64">
-            <p className="text-gray-500">Loading images...</p>
-          </div>
-        );
+        return  <div className="flex justify-center bg-purple-200 items-center h-screen">
+        <LoadingAnimation /> 
+      </div>
       }
     
       return (
