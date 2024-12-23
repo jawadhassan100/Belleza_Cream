@@ -52,7 +52,7 @@ const ProductImages = () => {
             ))}
           </div>
             <div className="flex justify-center mt-6">
-                <Link to="`/product/images`">
+                <Link to="/product/image">
               <button
                 className="px-6 py-2 bg-purple-500 text-white rounded-sm shadow hover:bg-purple-800 transition duration-300"
               >

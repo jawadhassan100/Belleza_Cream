@@ -26,12 +26,14 @@ const HomePage = () => {
       productSectionRef.current.scrollIntoView({ behavior: "smooth" });
     }
   };
-
+  
   useEffect(() => {
     // Scroll to top on component mount
     window.scrollTo(0, 0);
-
-    // Show or hide the scroll button based on scroll position
+  
+    // Prevent browser from retaining scroll position on refresh
+    window.history.scrollRestoration = 'manual';
+  
     const handleScroll = () => {
       if (window.scrollY > 110) {
         setShowScrollButton(true);
@@ -39,10 +41,11 @@ const HomePage = () => {
         setShowScrollButton(false);
       }
     };
-
+  
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+  
 
   // Function to scroll to top smoothly
   const scrollToTop = () => {

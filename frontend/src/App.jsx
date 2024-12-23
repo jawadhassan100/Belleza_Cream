@@ -13,6 +13,7 @@ import { useEffect, useState } from "react"
 import AdminRoute from "./helpers/AdminRoutes"
 import Dashboard from "./pages/Dashboard/Dashboard"
 import Unauthorized from "./pages/Unauthorized/Unauthorized"
+import FeatureImages from "./pages/FeatureImages/FeatureImages"
 
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -60,6 +61,7 @@ const App = () => {
       <Route path="/register"  element={ <Register/>}/>
       <Route path="/login"  element={ <Login/>}/>
       <Route path="/order-form/:id"  element={ <OrderForm/>}/>
+      <Route path="/product/image"  element={ <FeatureImages/>}/>
       <Route path="/unauthorized" element={<Unauthorized/>} />
       <Route path="/dashboard" element={<AdminRoute element={<Dashboard/>} />} />
     </Routes>
