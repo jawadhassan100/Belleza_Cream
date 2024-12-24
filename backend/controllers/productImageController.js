@@ -97,11 +97,19 @@ exports.deleteImage = async (req, res) => {
   try {
     const imageId = req.params.id;
 
-    const deletedImage = await ProductImage.findByIdAndDelete(imageId);
-
-    if (!deletedImage) {
+    const image = await ProductImage.findById(imageId);
+    if (!image) {
       return res.status(404).json({ msg: "Image not found" });
     }
+
+    // Extract public_id from the image URL
+    const publicId = image.imageUrl.split('/').slice(-1)[0].split('.')[0];
+
+    // Delete the image from Cloudinary
+    await cloudinary.uploader.destroy(`product_images/${publicId}`);
+
+    // Delete from database
+    await ProductImage.findByIdAndDelete(imageId);
 
     res.status(200).json({ msg: "Image deleted successfully" });
   } catch (error) {
