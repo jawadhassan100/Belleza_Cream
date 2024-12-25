@@ -14,6 +14,9 @@ import AdminRoute from "./helpers/AdminRoutes"
 import Dashboard from "./pages/Dashboard/Dashboard"
 import Unauthorized from "./pages/Unauthorized/Unauthorized"
 import FeatureImages from "./pages/FeatureImages/FeatureImages"
+import AdminAddImage from "./pages/AdminAddImage/AdminAddImage"
+import AdminAllContacts from "./pages/AdminAllContacts/AdminAllContacts"
+import AdminAllOrders from "./pages/AdminAllOrders/AdminAllOrders"
 
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -64,6 +67,10 @@ const App = () => {
       <Route path="/product/image"  element={ <FeatureImages/>}/>
       <Route path="/unauthorized" element={<Unauthorized/>} />
       <Route path="/dashboard" element={<AdminRoute element={<Dashboard/>} />} />
+      <Route path="/add-image" element={<AdminRoute element={<AdminAddImage/>} />} />
+      <Route path="/all-contacts" element={<AdminRoute element={<AdminAllContacts />} />} />
+      <Route path="/all-orders" element={<AdminRoute element={<AdminAllOrders />} />} />
+
     </Routes>
     </AuthProvider>
     </>

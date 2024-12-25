@@ -26,7 +26,7 @@ const orderConfirmation = (userName, order) => {
         </p>
         
         <p style="font-size: 16px; margin: 10px 0;">
-          <strong>Shipping Address:</strong> ${order.address}, ${order.city}, ${order.country}
+          <strong>Shipping Address:</strong> ${order.address}, ${order.city}, ${order.province}
         </p>
         
         <p style="font-size: 16px; margin: 10px 0;">

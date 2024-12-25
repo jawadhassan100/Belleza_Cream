@@ -29,7 +29,7 @@ const orderConfirmation = require("../utils/Template/orderConfirmation");
         email,
         phoneNumber,
         city,
-        country,
+        province ,
         products: [{ product: product._id, quantity }], // Directly reference the product
         address,
         paymentMethod: 'cod', // Cash on delivery

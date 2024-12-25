@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { FaBars, FaHome } from "react-icons/fa";
+import { AiFillProduct } from "react-icons/ai";
 import { MdLocalShipping } from "react-icons/md";
 import { RiContactsFill } from "react-icons/ri";
 import { Link } from "react-router";
@@ -36,6 +37,17 @@ const Sidebar = () => {
             >
               <FaHome size={20} />
               {isOpen && <span>Home</span>}
+            </a>
+          </li>
+            </Link>
+            <Link to="/add-image">
+          <li>
+            <a
+              href="#"
+              className="flex items-center gap-4 p-3 mr-2 rounded-md hover:bg-purple-600 transition-all"
+            >
+               <AiFillProduct size={20} />
+              {isOpen && <span>Products Image</span>}
             </a>
           </li>
             </Link>

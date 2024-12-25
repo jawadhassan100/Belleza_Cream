@@ -48,7 +48,7 @@ const Navbar = () => {
 
         {/* Right: Menu Items, Cart Icon, and Logout */}
         <div className="flex items-center space-x-8 text-white font-semibold text-lg">
-          <div className="hidden md:flex gap-8 space-x-6">
+          <div className="hidden md:flex gap-4 space-x-6">
             <Link to="/" className="hover:text-purple-900 transition duration-300">
               Home
             </Link>
