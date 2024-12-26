@@ -41,7 +41,7 @@ const orderSchema = new mongoose.Schema({
   ],
   paymentMethod: {
     type: String,
-    enum: ['cod'],
+    enum: ['cash on delivery'],
     required: true,
   },
   totalPrice: {

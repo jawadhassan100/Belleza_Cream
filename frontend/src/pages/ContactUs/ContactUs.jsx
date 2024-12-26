@@ -41,7 +41,7 @@ const Contact = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 flex justify-center items-center pt-20x py-10 px-4">
+    <div className="min-h-screen bg-gray-100 flex justify-center items-center pt-20 py-10 px-4">
       <motion.div
         className="bg-white shadow-lg rounded-lg p-8 contact-form w-full max-w-lg ease-in-out"
         initial={{ opacity: 0, x: -500 }}  // Start position (offscreen to the left)

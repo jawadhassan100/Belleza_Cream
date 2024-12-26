@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import { useSnackbar } from "notistack";
+import LoadingAnimation from "../../components/LoadingAnimation/LoadingAnimation"; // Assuming you have this component
 import config from "../../config/config";
 
 const BASE_URL = config.BASE_URL;
@@ -9,6 +10,7 @@ const BASE_URL = config.BASE_URL;
 const AllContact = () => {
   const [contacts, setContacts] = useState([]);
   const [selectedMessage, setSelectedMessage] = useState(null);
+  const [loading, setLoading] = useState(true);  // Add loading state
   const { enqueueSnackbar } = useSnackbar();
 
   // Fetch all contacts
@@ -27,6 +29,8 @@ const AllContact = () => {
           variant: "error",
         });
         console.error("Error fetching contacts:", err);
+      } finally {
+        setLoading(false);  // Set loading to false when the request is done
       }
     };
     fetchContacts();
@@ -63,15 +67,22 @@ const AllContact = () => {
     setSelectedMessage(null);
   };
 
-    return (
-        <div className="flex bg-purple-200 pt-16 h-screen text-gray-800">
-          <Sidebar />
-      
-          <div className="w-full p-6">
-            <h1 className="text-4xl font-bold mb-6 text-center text-purple-800">
-              All Contacts
-            </h1>
-      
+  return (
+    <div className="flex bg-purple-200 pt-16 h-screen text-gray-800">
+      <Sidebar />
+      <div className="w-full p-6">
+        {/* Show loading animation while fetching */}
+        {loading && (
+          <div className="flex justify-center bg-purple-200 -mt-10 items-center h-screen">
+            <LoadingAnimation />
+          </div>
+        )}
+
+        {/* Display contacts only when loading is done */}
+        {!loading && (
+          <div>
+            <h1 className="text-4xl font-bold mb-6 text-center text-purple-800">All Contacts</h1>
+
             {contacts.length === 0 ? (
               // Show message when no contacts exist
               <div className="flex items-center justify-center h-full">
@@ -116,7 +127,7 @@ const AllContact = () => {
                     </tbody>
                   </table>
                 </div>
-      
+
                 {/* Cards for small screens */}
                 <div className="md:hidden grid grid-cols-1 gap-4">
                   {contacts.map((contact) => (
@@ -145,7 +156,7 @@ const AllContact = () => {
                 </div>
               </>
             )}
-      
+
             {/* Modal for viewing message */}
             {selectedMessage && (
               <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
@@ -161,9 +172,9 @@ const AllContact = () => {
               </div>
             )}
           </div>
-        </div>
-      
-  
+        )}
+      </div>
+    </div>
   );
 };
 
