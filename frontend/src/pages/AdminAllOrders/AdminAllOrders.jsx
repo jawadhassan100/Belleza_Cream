@@ -4,7 +4,7 @@ import Sidebar from "../../components/Sidebar/Sidebar";
 import config from "../../config/config";
 import { useSnackbar } from "notistack";
 import LoadingAnimation from "../../components/LoadingAnimation/LoadingAnimation";
-
+import './order.css'
 const BASE_URL = config.BASE_URL;
 
 const AdminAllOrders = () => {
@@ -138,7 +138,7 @@ const AdminAllOrders = () => {
                       {orders.map((order) => (
                         <div key={order._id} className="bg-white p-4 rounded-lg shadow-md">
                           <h2 className="text-xl font-semibold text-purple-600">{order.fullName}</h2>
-                          <p><strong>Email:</strong> {order.email}</p>
+                          <p className="order-email"><strong>Email:</strong> {order.email}</p>
                           <p><strong>Total Price:</strong> {order.totalPrice}rs</p>
                           <div className="mt-4 space-x-2">
                             <button
@@ -165,7 +165,7 @@ const AdminAllOrders = () => {
           
           {/* Modal for viewing order details */}
           {isModalOpen && selectedOrder && (
-            <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+            <div className="fixed inset-0 flex px-2 items-center justify-center bg-black bg-opacity-50 z-50">
               <div className="bg-white rounded-lg shadow-lg w-96 p-6">
                 <h2 className="text-xl font-bold mb-4">Order Details</h2>
                 <p><strong>Name:</strong> {selectedOrder.fullName}</p>

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useSnackbar } from 'notistack';
 import { motion } from 'framer-motion';
@@ -16,6 +16,9 @@ const Contact = () => {
   const { name, email, subject, message } = formData;
   const { enqueueSnackbar } = useSnackbar();
 
+  useEffect(()=>{
+    window.scrollTo(0, 0);
+  })
   const handleInputChange = (e) => {
     const { id, value } = e.target;
     setFormData({ ...formData, [id]: value });
@@ -25,7 +28,7 @@ const Contact = () => {
     e.preventDefault();
 
     if (!name || !email || !subject || !message) {
-      enqueueSnackbar('All fields are required!', { variant: 'warning' });
+      enqueueSnackbar('All fields are required!', { variant: 'warning' , autoHideDuration:1000 });
       return;
     }
 
@@ -59,7 +62,7 @@ const Contact = () => {
               onChange={handleInputChange}
               className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
               placeholder="Your Name"
-              required
+              
             />
           </motion.div>
           <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
@@ -71,7 +74,7 @@ const Contact = () => {
               onChange={handleInputChange}
               className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
               placeholder="Your Email"
-              required
+              
             />
           </motion.div>
           <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
@@ -83,7 +86,7 @@ const Contact = () => {
               onChange={handleInputChange}
               className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
               placeholder="Subject"
-              required
+              
             />
           </motion.div>
           <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
@@ -94,7 +97,7 @@ const Contact = () => {
               onChange={handleInputChange}
               className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 h-32 resize-none"
               placeholder="Your Message"
-              required
+              
             ></textarea>
           </motion.div>
           <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>

@@ -43,7 +43,7 @@ const Features = () => {
 
       {/* Features Grid */}
       <motion.div
-        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12"
+        className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-12"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: false, amount: 0.2 }}

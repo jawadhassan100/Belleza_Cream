@@ -35,6 +35,7 @@ const OrderForm = () => {
 
   useEffect(() => {
     const fetchProduct = async () => {
+      window.scrollTo(0, 0);
       try {
         const response = await axios.get(`${BASE_URL}/product/${id}`);
         const price = response.data.price;
@@ -80,11 +81,11 @@ const OrderForm = () => {
   };
 
   return (
-    <div className="pt-20 flex justify-center items-center p-6 bg-gray-100 rounded-md shadow-md">
+    <div className="pt-20 flex justify-center items-center p-4 bg-gray-100 rounded-md shadow-md">
       <div className="bg-white shadow-lg rounded-lg p-4 contact-form w-full max-w-lg ease-in-out">
       <h2 className="text-2xl font-bold mb-6 text-center">Place Your Order</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
             <label className="block font-semibold">Full Name <span className="text-red-500">*</span></label>
             <input
@@ -137,7 +138,7 @@ const OrderForm = () => {
           />
         </div>
 
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2  gap-4">
           <div>
             <label className="block font-semibold">City <span className="text-red-500">*</span></label>
             <input
@@ -168,7 +169,7 @@ const OrderForm = () => {
           </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2  gap-4">
           <div>
             <label className="block font-semibold">Quantity <span className="text-red-500">*</span></label>
             <input

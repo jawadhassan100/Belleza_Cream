@@ -41,9 +41,9 @@ const Register = () => {
 
 
   return (
-    <div className="flex items-center  justify-center h-screen bg-purple-200">
+    <div className="flex items-center pt-20 justify-center h-screen bg-purple-200">
       <motion.div
-        className="bg-white -mt-8 p-8 rounded-lg shadow-lg w-96"
+        className="bg-white -mt-8 p-8 mx-2 rounded-lg shadow-lg w-96"
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.3 }}

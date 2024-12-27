@@ -4,7 +4,7 @@ import Sidebar from "../../components/Sidebar/Sidebar";
 import { useSnackbar } from "notistack";
 import LoadingAnimation from "../../components/LoadingAnimation/LoadingAnimation"; // Assuming you have this component
 import config from "../../config/config";
-
+import './contact.css'
 const BASE_URL = config.BASE_URL;
 
 const AllContact = () => {
@@ -81,7 +81,7 @@ const AllContact = () => {
         {/* Display contacts only when loading is done */}
         {!loading && (
           <div>
-            <h1 className="text-4xl font-bold mb-6 text-center text-purple-800">All Contacts</h1>
+            <h1 className="text-2xl font-bold mb-6 text-center text-purple-800">All Contacts</h1>
 
             {contacts.length === 0 ? (
               // Show message when no contacts exist
@@ -135,8 +135,8 @@ const AllContact = () => {
                       key={contact._id}
                       className="bg-white text-gray-800 p-4 rounded-lg shadow-lg flex flex-col justify-between border border-gray-300"
                     >
-                      <h2 className="text-xl font-bold mb-2">{contact.name}</h2>
-                      <p className="text-gray-600 mb-2">{contact.email}</p>
+                      <h2 className="text-xl font-bold mb-2 contact-name">{contact.name}</h2>
+                      <p className="text-gray-600 mb-2 contact-email">{contact.email}</p>
                       <div className="flex gap-2">
                         <button
                           onClick={() => handleViewMessage(contact.message)}

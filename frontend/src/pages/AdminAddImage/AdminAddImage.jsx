@@ -2,7 +2,7 @@ import Sidebar from "../../components/Sidebar/Sidebar";
 import { useState } from "react";
 import axios from "axios";
 import config from "../../config/config";
-
+import './image.css'
 const BASE_URL = config.BASE_URL;
 
 const AdminAddImage = () => {
@@ -46,12 +46,12 @@ const AdminAddImage = () => {
       <Sidebar />
       <div className="flex-1 overflow-auto mt-10 p-6">
         <div className="w-full max-w-md mx-auto bg-white p-8 rounded-lg shadow-md">
-          <h1 className="text-2xl font-bold text-center mb-4">Add New Image</h1>
+          <h1 className="text-2xl font-bold text-center mb-4 image-text">Add New Image</h1>
           <form onSubmit={handleImageUpload} className="space-y-4">
-            <div>
+            <div className="input">
               <label
                 htmlFor="imageUpload"
-                className="block text-sm font-medium text-gray-700 mb-2"
+                className="block text-sm font-medium text-gray-700 mb-2 heading"
               >
                 Upload Image
               </label>

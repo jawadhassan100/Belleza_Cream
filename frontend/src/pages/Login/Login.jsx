@@ -57,9 +57,9 @@ const Login = () => {
   };
 
   return (
-    <div className="flex items-center justify-center h-screen bg-purple-200">
+    <div className="flex items-center pt-20 px-4 justify-center h-screen bg-purple-200">
       <motion.div
-        className="bg-white p-8 -mt-10 rounded-lg shadow-lg w-96"
+        className="bg-white py-8 px-4 -mt-10 rounded-lg shadow-lg w-96"
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.3 }}
