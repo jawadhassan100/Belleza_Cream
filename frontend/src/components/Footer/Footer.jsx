@@ -52,7 +52,7 @@ const Footer = () => {
             Have questions or feedback? We’d love to hear from you!
           </p>
           <a
-            href="mailto:jawadhassankhan2001gmail.com"
+            href="mailto:Bellezapk1@gmail.com"
             className="text-purple-400 hover:underline"
           >
             Email Us

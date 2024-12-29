@@ -1,7 +1,11 @@
+import { useState } from "react";
 import Footer from "../../components/Footer/Footer";
 
 
 const AboutUs = () => {
+  useState(()=>{
+    window.scrollTo(0,0)
+  })
     return (
         <>
        
